@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>印学知识图谱问答系统</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="workspace">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="mark">KG</div>
+          <div>
+            <h1>印学知识图谱问答</h1>
+            <p>LangGraph 风格工作流 / 工具调用 / SPARQL 查询</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>示例问题</h2>
+          <div class="examples" id="examples"></div>
+        </div>
+
+        <div class="panel small">
+          <h2>工作流节点</h2>
+          <ol class="node-list">
+            <li>问题解析</li>
+            <li>工具路由</li>
+            <li>工具执行</li>
+            <li>SPARQL 查询</li>
+            <li>答案生成</li>
+          </ol>
+        </div>
+      </aside>
+
+      <section class="main-pane">
+        <div class="query-box">
+          <label for="question">自然语言查询</label>
+          <div class="input-row">
+            <input id="question" type="text" value="文彭的字号是什么？" autocomplete="off">
+            <button id="askBtn">查询</button>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-tab="answer">问答结果</button>
+          <button class="tab" data-tab="sparql">高级 SPARQL</button>
+          <button class="tab" data-tab="tools">工具说明</button>
+          <button class="tab" data-tab="trace">工作流</button>
+        </div>
+
+        <section class="tab-page active" id="answer">
+          <div class="answer-card">
+            <div class="card-title">答案</div>
+            <p id="answerText">等待查询。</p>
+          </div>
+          <div class="grid-two">
+            <div class="card">
+              <div class="card-title">查询证据</div>
+              <table>
+                <thead>
+                  <tr><th>主体</th><th>关系/属性</th><th>客体</th></tr>
+                </thead>
+                <tbody id="evidenceBody"></tbody>
+              </table>
+            </div>
+            <div class="card">
+              <div class="card-title">生成的 SPARQL</div>
+              <pre id="sparqlView"></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="tab-page" id="sparql">
+          <textarea id="sparqlInput">SELECT ?zi ?hao WHERE {
+  ?person rdfs:label "文彭" .
+  OPTIONAL { ?person :zi ?zi . }
+  OPTIONAL { ?person :hao ?hao . }
+}</textarea>
+          <button id="sparqlBtn">执行 SPARQL</button>
+          <div class="card">
+            <div class="card-title">SPARQL 结果</div>
+            <table>
+              <thead>
+                <tr><th>主体</th><th>关系/属性</th><th>客体</th></tr>
+              </thead>
+              <tbody id="sparqlBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="tab-page" id="tools">
+          <div class="card">
+            <div class="card-title">大模型可调用工具与参数</div>
+            <table>
+              <thead>
+                <tr><th>工具名</th><th>功能</th><th>参数</th><th>返回内容</th></tr>
+              </thead>
+              <tbody id="toolBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="tab-page" id="trace">
+          <div class="trace" id="traceList"></div>
+        </section>
+      </section>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>

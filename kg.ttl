@@ -1,0 +1,46 @@
+@prefix : <http://example.org/sealkg/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:WenPeng a :Person ;
+  rdfs:label "文彭" ;
+  :zi "寿承" ;
+  :hao "三桥" ;
+  :dynasty "明代" ;
+  :identity "书法家、篆刻家" ;
+  :birthYear "1498" ;
+  :deathYear "1573" ;
+  :sonOf :WenZhengming ;
+  :studentOf :WenZhengming ;
+  :friendOf :HeZhen ;
+  :belongsToSchool :WumenSchool ;
+  :founded :WumenSchool .
+
+:WenZhengming a :Person ;
+  rdfs:label "文徵明" ;
+  :zi "徵仲" ;
+  :hao "衡山" ;
+  :dynasty "明代" ;
+  :identity "书画家、文学家" ;
+  :fatherOf :WenPeng .
+
+:HeZhen a :Person ;
+  rdfs:label "何震" ;
+  :zi "主臣" ;
+  :hao "雪渔" ;
+  :dynasty "明代" ;
+  :identity "篆刻家" ;
+  :friendOf :WenPeng ;
+  :belongsToSchool :WumenSchool .
+
+:ChenDaofu a :Person ;
+  rdfs:label "陈道复" ;
+  :zi "复甫" ;
+  :hao "白阳" ;
+  :dynasty "明代" ;
+  :identity "书画家" ;
+  :friendOf :WenPeng ;
+  :belongsToSchool :WumenSchool .
+
+:WumenSchool a :School ;
+  rdfs:label "吴门印派" ;
+  :corePerson :WenPeng .
